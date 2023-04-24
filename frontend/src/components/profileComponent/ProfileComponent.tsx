@@ -3,7 +3,7 @@ import {Profile} from "../../interfaces/interfaces";
 import BookService from "../../services/bookService";
 
 
-type ProfilesChangeArgument = (value: Profile[]) => Profile[];
+type ProfilesChangeArgument = (value: Array<Profile>) => Array<Profile>;
 
 interface TableProps {
     profiles: Profile[] | [];

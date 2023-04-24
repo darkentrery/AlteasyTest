@@ -14,12 +14,17 @@
       text-align: center;
       justify-content: center;
       border: 1px solid #66d3c7;
+      box-sizing: border-box;
 
       &.cell-1 {flex: 0 0 200px;}
       &.cell-2 {flex: 0 0 200px;}
       &.cell-3 {flex: 0 0 150px;}
       &.cell-4 {flex: 0 0 250px;}
       &.cell-5 {flex: 0 0 50px;}
+      &.cell-6 {flex: 0 0 50px;}
+    }
+    &.hidden {
+      display: none;
     }
   }
   .table-body {
@@ -34,12 +39,47 @@
         display: flex;
         justify-content: end;
         border: 1px solid #66d3c7;
+        box-sizing: border-box;
 
         &.cell-1 {flex: 0 0 200px;}
         &.cell-2 {flex: 0 0 200px;}
-        &.cell-3 {flex: 0 0 150px;}
+        &.cell-3 {
+          flex: 0 0 150px;
+          width: 150px;
+        }
         &.cell-4 {flex: 0 0 250px;}
-        &.cell-5 {flex: 0 0 50px;}
+        &.cell-5 {
+          flex: 0 0 50px;
+          width: 50px;
+        }
+        &.cell-6 {flex: 0 0 50px;}
+      }
+      &.error {
+        color: red;
+      }
+    }
+    &.hidden {
+      display: none;
+    }
+  }
+  .btns {
+    display: flex;
+    gap: 30px;
+    flex: 0 0 80px;
+    align-items: stretch;
+    padding: 20px 40px;
+    box-sizing: border-box;
+
+    .btn {
+      display: flex;
+      flex: 0 0 150px;
+      border: 1px solid black;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background: antiquewhite;
       }
     }
   }

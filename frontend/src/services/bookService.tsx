@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {Profile} from "../interfaces/interfaces";
+import {Book, Profile} from "../interfaces/interfaces";
 
 
 const API_URL: string = "http://127.0.0.1:8000/api";
@@ -35,7 +35,7 @@ const getRequest = (url: string) => {
 		});
 };
 
-const postRequest = (url: string, data: Map<string, any>) => {
+const postRequest = (url: string, data: Book | Profile | Array<Book>) => {
 	return axios.post(API_URL + url, data, {headers: {
 		'Content-Type': 'application/json',
 		'X-CSRFToken': csrftoken,
@@ -51,6 +51,9 @@ const postRequest = (url: string, data: Map<string, any>) => {
 const BookService = {
 	getBooks() { return getRequest('/get-books/'); },
 	changeProfile(data: Profile) { return postRequest('/change-profile/', data) },
+	updateBooks(data: Array<Book>) { return postRequest('/update-books/', data) },
+	createBook(data: Book) { return postRequest('/create-book/', data) },
+	deleteBooks(data: Array<Book>) { return postRequest('/delete-books/', data) },
 }
 
 export default BookService;
