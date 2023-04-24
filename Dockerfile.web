@@ -28,12 +28,9 @@ RUN set -xe \
 # copy project
 # TODO: exclude static files
 COPY ./config/ $BASE_DIR/config/
-COPY ./google_sheets/ $BASE_DIR/google_sheets/
+COPY ./alteasy/ $BASE_DIR/alteasy/
 COPY ./requirements/ $BASE_DIR/requirements/
 COPY ./manage.py $BASE_DIR
-COPY ./scripts/ $BASE_DIR/scripts/
-COPY ./run.py $BASE_DIR
-COPY ./servicetoken.json $BASE_DIR
 
 COPY ./frontend/public/ $FRONT_DIR/public/
 COPY ./frontend/src/ $FRONT_DIR/src/

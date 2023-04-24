@@ -1,5 +1,8 @@
 from django.urls import path
 
+from alteasy.books import views
+
+
 urlpatterns = [
-    # path("get-supplies/", views.SuppliesView.as_view(), name='get-supplies'),
+    path("get-books/", views.GetBooks.as_view(), name='get-books'),
 ]

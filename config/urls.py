@@ -8,5 +8,5 @@ from alteasy.books import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.IndexView.as_view(), name='index'),
-    path('api/supplies/', include('alteasy.books.urls')),
+    path('api/', include('alteasy.books.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
