@@ -1,5 +1,8 @@
 import axios from 'axios';
+import {Profile} from "../interfaces/interfaces";
 
+
+const API_URL: string = "http://127.0.0.1:8000/api";
 
 const getCookie = (name: string): string | null => {
 	let cookieValue = null;
@@ -20,7 +23,7 @@ const getCookie = (name: string): string | null => {
 const csrftoken: string | null = getCookie('csrftoken');
 
 const getRequest = (url: string) => {
-	return axios.get(url, {headers: {
+	return axios.get(API_URL + url, {headers: {
 		'Content-Type': 'application/json',
 		'X-CSRFToken': csrftoken,
 	}})
@@ -32,8 +35,22 @@ const getRequest = (url: string) => {
 		});
 };
 
+const postRequest = (url: string, data: Map<string, any>) => {
+	return axios.post(API_URL + url, data, {headers: {
+		'Content-Type': 'application/json',
+		'X-CSRFToken': csrftoken,
+	}})
+		.then((response) => {
+			return response;
+		})
+		.catch((error) => {
+			return error.response;
+		});
+}
+
 const BookService = {
-	getBooks() { return getRequest('http://127.0.0.1:8000/api/get-books/'); },
+	getBooks() { return getRequest('/get-books/'); },
+	changeProfile(data: Profile) { return postRequest('/change-profile/', data) },
 }
 
 export default BookService;

@@ -15,3 +15,10 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ["column_name", "is_visible",]
         read_only_fields = fields
+
+
+class ProfileChangeSerializer(serializers.ModelSerializer):
+    # column_name = serializers.CharField
+    class Meta:
+        model = Profile
+        fields = ["column_name", "is_visible",]

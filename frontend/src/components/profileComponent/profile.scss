@@ -1,0 +1,50 @@
+.profile-component {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 400px;
+  box-sizing: border-box;
+
+  .table-head {
+    display: flex;
+    flex: 0 0 50px;
+
+    .cell {
+      display: flex;
+      background-color: black;
+      color: white;
+      text-align: center;
+      justify-content: center;
+      border: 1px solid #66d3c7;
+      box-sizing: border-box;
+
+      &.cell-1 {flex: 0 0 200px;}
+      &.cell-2 {flex: 0 0 200px;}
+    }
+  }
+  .table-body {
+    display: flex;
+    flex-direction: column;
+
+    .row {
+      flex: 0 0 40px;
+      display: flex;
+      cursor: pointer;
+
+      .cell {
+        display: flex;
+        justify-content: end;
+        border: 1px solid #66d3c7;
+        box-sizing: border-box;
+
+        &.cell-1 {flex: 0 0 200px;}
+        &.cell-2 {flex: 0 0 200px;}
+      }
+      &.active {
+        background: #0bc54a;
+      }
+      &:hover {
+        background: antiquewhite;
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ class Book(models.Model):
     title = models.CharField(_("Title"), max_length=30)
     author = models.CharField(_("Author"), max_length=30)
     description = models.TextField(_("Description"), max_length=512, blank=True, null=True)
-    price = models.IntegerField(_("Price"), validators=[MinValueValidator(0), MaxValueValidator(5)])
+    price = models.IntegerField(_("Price"), validators=[MinValueValidator(0), MaxValueValidator(99999)])
 
     class Meta:
         verbose_name = "Book"
@@ -26,6 +26,7 @@ class Profile(models.Model):
     class Meta:
         verbose_name = "Profile"
         verbose_name_plural = "Profiles"
+        ordering = ["id",]
 
     def __str__(self):
         return f"{self.column_name}"
