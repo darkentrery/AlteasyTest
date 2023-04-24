@@ -19,7 +19,7 @@ const BodyComponent = () => {
 
     return (
         <div className={"body-component"}>
-            <TableComponent books={books} setBooks={setBooks}/>
+            <TableComponent books={books} setBooks={setBooks} profiles={profiles}/>
             <ProfileComponent profiles={profiles} setProfiles={setProfiles}/>
         </div>
     )

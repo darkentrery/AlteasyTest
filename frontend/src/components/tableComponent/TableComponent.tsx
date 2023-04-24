@@ -1,14 +1,15 @@
-import {ChangeEvent, FC, MouseEvent, useEffect, useState} from "react";
-import {Book} from "../../interfaces/interfaces";
+import {ChangeEvent, FC, useEffect, useState} from "react";
+import {Book, Profile} from "../../interfaces/interfaces";
 import BookService from "../../services/bookService";
 
 
 interface TableProps {
     books: Book[] | [];
     setBooks: (callback: Array<Book>) => void;
+    profiles: Profile[] | [];
 }
 
-const TableComponent: FC<TableProps> = ({books, setBooks}) => {
+const TableComponent: FC<TableProps> = ({books, setBooks, profiles}) => {
     let firstState: Book = {
         id: null,
         name: '',
@@ -21,14 +22,15 @@ const TableComponent: FC<TableProps> = ({books, setBooks}) => {
     const [errorBook, setErrorBook] = useState<Book>(firstState);
     const [addBook, setAddBook] = useState<boolean>(false);
     const [selectBooks, setSelectBooks] = useState<Array<number>>([]);
+    const [hiddens, setHiddens] = useState<Array<string>>([]);
 
-    // useEffect(() => {
-    //     let array: Array<number> = [];
-    //     books.forEach((book, i) => {
-    //         array.push(i);
-    //     })
-    //     setSelectBooks(array);
-    // }, [books])
+    useEffect(() => {
+        let array: Array<string> = [];
+        profiles.forEach(profile => {
+            if (!profile.is_visible) array.push(profile.column_name);
+        })
+        setHiddens(array);
+    }, [profiles])
 
     const changeName = (e: ChangeEvent<HTMLInputElement>): void => {
         let value: string = e.currentTarget.value.slice(0, 20);
@@ -78,7 +80,6 @@ const TableComponent: FC<TableProps> = ({books, setBooks}) => {
     const updateBooks = (): void => {
         BookService.updateBooks(books).then((response => {
             setBooks(response.data);
-            console.log(response.data)
         }))
     }
 
@@ -137,7 +138,6 @@ const TableComponent: FC<TableProps> = ({books, setBooks}) => {
                     if (response.data.title !== undefined) error.title = "Empty field!"
                     if (response.data.author !== undefined) error.author = "Empty field!"
                     setErrorBook(error);
-                    console.log(response)
                 }
             })
         }
@@ -156,7 +156,6 @@ const TableComponent: FC<TableProps> = ({books, setBooks}) => {
             array.push(Number(id));
         }
         setSelectBooks(array);
-        console.log(e.currentTarget.checked)
     }
 
     const deleteBooks = (): void => {
@@ -174,21 +173,21 @@ const TableComponent: FC<TableProps> = ({books, setBooks}) => {
     return (
         <div className={"table-component"}>
             <div className={"table-head"}>
-                <div className={"cell cell-1"}>Name</div>
-                <div className={"cell cell-2"}>Title</div>
-                <div className={"cell cell-3"}>Author</div>
-                <div className={"cell cell-4"}>Description</div>
-                <div className={"cell cell-5"}>Price</div>
+                <div className={`cell cell-1 ${hiddens.includes('name') ? 'hidden': ''}`}>Name</div>
+                <div className={`cell cell-2 ${hiddens.includes('title') ? 'hidden': ''}`}>Title</div>
+                <div className={`cell cell-3 ${hiddens.includes('author') ? 'hidden': ''}`}>Author</div>
+                <div className={`cell cell-4 ${hiddens.includes('description') ? 'hidden': ''}`}>Description</div>
+                <div className={`cell cell-5 ${hiddens.includes('price') ? 'hidden': ''}`}>Price</div>
             </div>
             <div className={"table-body"}>
                 {books.map((book, i) => (
                     <div className={"row"} key={i} id={i.toString()}>
-                        <input className={"cell cell-1"} value={book.name} onChange={changeName}/>
-                        <input className={"cell cell-2"} value={book.title} onChange={changeTitle}/>
-                        <input className={"cell cell-3"} value={book.author} onChange={changeAuthor}/>
-                        <textarea className={"cell cell-4"} value={book.description} onChange={changeDescription}></textarea>
-                        <input className={"cell cell-5"} value={book.price} onChange={changePrice}/>
-                        <input className={"cell cell-6"} type="checkbox" checked={selectBooks.includes(i) ? true : false} onChange={selectBook}/>
+                        <input className={`cell cell-1 ${hiddens.includes('name') ? 'hidden': ''}`} value={book.name} onChange={changeName}/>
+                        <input className={`cell cell-2 ${hiddens.includes('title') ? 'hidden': ''}`} value={book.title} onChange={changeTitle}/>
+                        <input className={`cell cell-3 ${hiddens.includes('author') ? 'hidden': ''}`} value={book.author} onChange={changeAuthor}/>
+                        <textarea className={`cell cell-4 ${hiddens.includes('description') ? 'hidden': ''}`} value={book.description} onChange={changeDescription}></textarea>
+                        <input className={`cell cell-5 ${hiddens.includes('price') ? 'hidden': ''}`} value={book.price} onChange={changePrice}/>
+                        <input className={`cell cell-6`} type="checkbox" checked={selectBooks.includes(i) ? true : false} onChange={selectBook}/>
                     </div>
                 ))}
             </div>

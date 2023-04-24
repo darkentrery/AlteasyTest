@@ -13,7 +13,6 @@ interface TableProps {
 export const ProfileComponent: FC<TableProps> = ({profiles, setProfiles}) => {
 
     const clickProfile = (e: MouseEvent<HTMLDivElement>): void => {
-        console.log(e.currentTarget.id)
         for (let obj of profiles) {
             if (obj.column_name === e.currentTarget.id) {
                 let profile: Profile = obj;

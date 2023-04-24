@@ -22,6 +22,9 @@
       &.cell-4 {flex: 0 0 250px;}
       &.cell-5 {flex: 0 0 50px;}
       &.cell-6 {flex: 0 0 50px;}
+      &.hidden {
+          display: none;
+        }
     }
     &.hidden {
       display: none;
@@ -53,6 +56,9 @@
           width: 50px;
         }
         &.cell-6 {flex: 0 0 50px;}
+        &.hidden {
+          display: none;
+        }
       }
       &.error {
         color: red;
