@@ -1,0 +1,12 @@
+asgiref==3.6.0
+colorama==0.4.6
+Django==4.2
+django-cors-headers==3.14.0
+django-environ==0.10.0
+djangorestframework==3.14.0
+loguru==0.7.0
+psycopg2-binary==2.9.6
+pytz==2023.3
+sqlparse==0.4.4
+tzdata==2023.3
+win32-setctime==1.1.0

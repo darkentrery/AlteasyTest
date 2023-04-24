@@ -15,15 +15,18 @@ services:
       - postgres_data_alteasy:/var/lib/postgresql/data/
     env_file:
       - ./.env
-    ports:
-      - "5448:5432"
+#    ports:
+#      - "5448:5432"
 
   web:
     build:
       context: .
       dockerfile: Dockerfile.web
     container_name: web_alteasy
-    command: bash -c "python3 manage.py collectstatic --noinput && python3 manage.py migrate && python3 run.py & python3 manage.py runserver 0.0.0.0:8000"
+    command: bash -c "python3 manage.py collectstatic --noinput && 
+                      python3 manage.py migrate && 
+                      python3 manage.py loaddata alteasy/fixtures/user.json alteasy/fixtures/profile.json && 
+                      python3 manage.py runserver 0.0.0.0:8000"
     depends_on:
       - postgres
     ports:
